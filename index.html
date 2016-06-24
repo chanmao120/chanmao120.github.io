@@ -103,34 +103,28 @@
 <li>支持复杂查询、与SQL</li>
 </ul>
 <hr>
-<h2 id="Druid简介-1"><a href="#Druid简介-1" class="headerlink" title="Druid简介"></a>Druid简介</h2><hr>
-<p>Druid 是一个开源的，分布式的，实时多维分析系统，能够快速聚合、灵活过滤、毫秒级查询、和低延迟实时数据导入</p>
-<ul>
-<li>快速响应交互式查询，支持高并发</li>
-<li>实时数据与离线数据导入 (支持 kafka,localfile,streams)</li>
-<li>Shared Nothing 容易扩展、列式存储、支持HDFS, S3 存储</li>
-<li>支持复杂查询、与SQL</li>
-</ul>
-<hr>
-<h2 id="Druid-数据集"><a href="#Druid-数据集" class="headerlink" title="Druid 数据集"></a>Druid 数据集</h2><h4 id="Druid将数据集分成三种类型-Timestamp-column-Dimension-columns-过滤数据-Metric-columns-聚合和计算"><a href="#Druid将数据集分成三种类型-Timestamp-column-Dimension-columns-过滤数据-Metric-columns-聚合和计算" class="headerlink" title="Druid将数据集分成三种类型: Timestamp column, Dimension columns(过滤数据), Metric columns(聚合和计算)."></a>Druid将数据集分成三种类型: <strong>Timestamp column</strong>, <strong>Dimension columns(过滤数据)</strong>, <strong>Metric columns(聚合和计算)</strong>.</h4><pre><code>timestamp             publisher          advertiser  gender  country  click  price
+<p>##Druid 数据集  </p>
+<p>####Druid将数据集分成三种类型: <strong>Timestamp column</strong>, <strong>Dimension columns(过滤数据)</strong>, <strong>Metric columns(聚合和计算)</strong>.</p>
+<pre><code>timestamp             publisher          advertiser  gender  country  click  price
 2011-01-01T01:01:35Z  bieberfever.com    google.com  Male    USA      0      0.65
 2011-01-01T01:03:63Z  bieberfever.com    google.com  Male    USA      0      0.62
 2011-01-01T01:04:51Z  bieberfever.com    google.com  Male    USA      1      0.45
 2011-01-01T01:00:00Z  ultratrimfast.com  google.com  Female  UK       0      0.87
 2011-01-01T02:00:00Z  ultratrimfast.com  google.com  Female  UK       0      0.99
 2011-01-01T02:00:00Z  ultratrimfast.com  google.com  Female  UK       1      1.53
-</code></pre><hr>
-<pre><code>&quot;timestampSpec&quot;: {
-     &quot;format&quot;: &quot;auto&quot;,
-     &quot;column&quot;: &quot;timestamp&quot;
-}
-&quot;dimensionsSpec&quot;: {
-     &quot;dimensions&quot;: [&quot;publisher&quot;, &quot;advertiser&quot;, &quot;gender&quot;, &quot;country&quot;]
-}
-&quot;metricsSpec&quot;: [
-     {&quot;name&quot;: &quot;click&quot;, &quot;type&quot;: &quot;count&quot;},
-     {&quot;name&quot;: &quot;price&quot;, &quot;type&quot;: &quot;doubleSum&quot;}
-]
+
+
+  &quot;timestampSpec&quot;: {
+       &quot;format&quot;: &quot;auto&quot;,
+       &quot;column&quot;: &quot;timestamp&quot;
+  }
+  &quot;dimensionsSpec&quot;: {
+       &quot;dimensions&quot;: [&quot;publisher&quot;, &quot;advertiser&quot;, &quot;gender&quot;, &quot;country&quot;]
+  }
+  &quot;metricsSpec&quot;: [
+       {&quot;name&quot;: &quot;click&quot;, &quot;type&quot;: &quot;count&quot;},
+       {&quot;name&quot;: &quot;price&quot;, &quot;type&quot;: &quot;doubleSum&quot;}
+  ]
 </code></pre><h3 id="核心数据结构-Segment"><a href="#核心数据结构-Segment" class="headerlink" title="核心数据结构 Segment"></a>核心数据结构 Segment</h3><p>Druid 的分片被称为 Segment , druid 默认按照时间分片</p>
 <p>Segment sampleData_2011-01-01T01:00:00:00Z_2011-01-01T02:00:00:00Z_v1_0 contains</p>
 <pre><code>2011-01-01T01:00:00Z  ultratrimfast.com  google.com  Male   USA     1800        25     15.70
@@ -144,7 +138,8 @@
         .append(start).append(delimiter)
         .append(end).append(delimiter)
         .append(version);
-</code></pre>
+</code></pre><h2 id="Druid-架构"><a href="#Druid-架构" class="headerlink" title="Druid 架构"></a>Druid 架构</h2><p><img src="~/Desktop/druid-master/TimLine图片20160624170126.jpg" alt=""></p>
+
       
     </div>
     <footer class="article-footer">
